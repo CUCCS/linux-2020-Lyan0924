@@ -1,0 +1,99 @@
+sudo: required
+language: bash
+
+before_install:
+        - sudo apt-get update
+
+         #安装shellcheck
+        - sudo apt-get install shellcheck
+     
+         #安装任务一需要使用的工具imagemagick 
+        - sudo apt-get install imagemagick 
+
+        #下载任务2-1需要使用的文件
+        - wget "https://c4pr1c3.github.io/LinuxSysAdmin/exp/chap0x04/worldcupplayerinfo.tsv"
+
+        #下载任务2-2需要使用的文件
+        - wget "https://c4pr1c3.github.io/LinuxSysAdmin/exp/chap0x04/web_log.tsv.7z"
+
+        #下载7zip解压文件
+        - sudo apt install p7zip-full
+        - 7z x web_log.tsv.7z
+
+script:
+
+
+
+         #任务一:用bash编写一个图片批处理脚本
+
+         #帮助文档
+         - bash  -h  
+
+         
+         #对jpeg格式图片进行图片质量压缩
+         #- bash shell_script/image_process.sh -q 80 ./Image （）
+
+         #对jpeg/png/svg格式图片在保持原始宽高比的前提下压缩分辨率
+         #- bash shell_script/image_process.sh -r 50 ./Image
+
+          
+         #批量添加自定义文本水印
+         - bash shell_script/image_process.sh -w watermark ./Image
+
+          
+         #前缀
+         - bash shell_script/image_process.sh -p 0 head ./Image
+
+         #后缀
+        - bash shell_script/image_process.sh -p 1 tail ./Image
+
+
+         #将png/svg图片统一转换为jpg格式图片
+         - bash shell_script/image_process.sh -t ./Image
+
+          
+         #任务二：用bash编写一个文本批处理脚本
+         #worldcupplayer
+
+         - bash shell_script/worldcupplayer.sh -h
+         - bash shell_script/worldcupplayer.sh -a
+         - bash shell_script/worldcupplayer.sh -b
+         - bash shell_script/worldcupplayer.sh -c
+         - bash shell_script/worldcupplayer.sh -d
+          
+
+         #web_log
+
+         - bash shell_script/webserver.sh -h
+
+         - bash shell_script/webserver.sh -a
+
+         - bash shell_script/webserver.sh -b
+
+         - bash shell_script/webserver.sh -c
+
+         - bash shell_script/webserver.sh -d
+
+         - bash shell_script/webserver.sh -e
+
+         - bash shell_script/webserver.sh -f /images/USA-logosmall.gif
+
+
+
+after_failure:
+
+        - id
+
+        - pwd
+
+        - df -h
+
+        - cat error.log
+
+
+
+notifications:
+
+          email:
+
+                  on_success: never
