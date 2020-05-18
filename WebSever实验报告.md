@@ -84,7 +84,7 @@ sudo apt install php-fpm php-mysql
  php-xml php-xmlrpc php-zip
 ```
 ---
-### 下载WordPress
+### 安装WordPress
 + 为WordPress创建一个MySQL仓库和用户  
 	启动Mysql和登录
 	```
@@ -236,7 +236,7 @@ sudo apt install php-fpm php-mysql
 
 + 配置数据库   
 建立数据库dvwa
-	```
+	```mysql
 	mysql> create database dvwa;
 	mysql> grant all on dvwa.* to dvwa@localhost identified by 'STRONGP@SSW0rd';
 	mysql> flush privileges;
@@ -374,12 +374,12 @@ sudo apt install php-fpm php-mysql
 	![](image/curl2.png)
 ---
 ## 实验问题
-+ 这次实验的基本状态就是：一杯茶一包烟（没有），一个bug卡一天。反正就是大大小小的坑没停过...不过踩坑也确实学到了很多东西
-+ 一开始执行apt update/install 的时候一直连接失败，或者报错`Release file for http://cn.archive.ubuntu.com/ubuntu/dists/bionic-updates/In`  
++ 这次实验的基本状态就是：一杯茶一包烟（没有），一个bug卡一天。反正就是大大小小的坑没停过...不过踩坑也确实是能学到很多东西
++ 一开始执行apt update/install 的时候一直连接失败，或者报错`Release file for http://cn.archive.ubuntu.com/ubuntu/dists/bionic-updates/In`     
 解决方法：查了一下[文档](https://www.cnblogs.com/outs/p/9706437.html)，说是系统时间不对导致的，执行`data`果然时间和现在不一样，应该是上次Systemd实验实操时改了的
-+ 第一次下载WordPress压缩包的时候是在本机下载传过去的，解压时报了个小错但我没看见（唉，真的卡了我好久好久...），于是正常执行操作，最后WordPress站点无法打开
-解决方法：重新在虚拟机内wget下载WordPress压缩包，成功解压后执行操作
-+ 在VeryNginx中配置Web管理页面仅允许白名单上的访客来源IP时，这里做的时候特意想到了要把本机ip加进去，但是好像ip地址打错了所以成功入坑了
++ 第一次下载WordPress压缩包的时候是在本机下载传过去的，解压时报了个小错但我没看见（唉，真的卡了我好久好久...），于是正常执行操作，最后WordPress站点无法打开        
+解决方法：重新在虚拟机内wget下载WordPress压缩包，成功解压后执行操作。怎么说呢，以后做实验一点要非常仔细
++ 在VeryNginx中配置Web管理页面仅允许白名单上的访客来源IP时，这里做的时候特意想到了要把本机ip加进去，但是好像ip地址打错了所以成功入坑了     
 解决方法：查看[文档](https://www.cnblogs.com/sanduzxcvbnm/p/11400349.html)说VeryNginx配置会保存在/opt/verynginx/verynginx/config/config.json中，于是去修改一下ip地址
 + 各种80端口让我脑海里一直循环范冰冰的rap“80 什么是80...”
 
